@@ -113,3 +113,9 @@ private_subnet = oci.core.Subnet(
     route_table_id=route_table.id,
     dhcp_options_id=vcn.default_dhcp_options_id,
 )
+
+# Outputs
+pulumi.export("vcn_id", vcn.id)
+pulumi.export("private_subnet_id", private_subnet.id)
+pulumi.export("public_subnet_id", public_subnet.id)
+pulumi.export("internet_gateway_id", internet_gateway.id)
