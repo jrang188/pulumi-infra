@@ -1,7 +1,7 @@
 name: Mirroring
 
 on: 
-  [push, delete]:
+  push:
     branches:
       - main
 
