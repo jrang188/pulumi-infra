@@ -77,15 +77,6 @@ class Network:
             egress_security_rules=[{"protocol": "6", "destination": "0.0.0.0/0"}],
         )
 
-        # Private Security List allowing ingress traffic within the VCN CIDR
-        self.private_security_list = oci.core.SecurityList(
-            "private_security_list",
-            compartment_id=self.compartment_ocid,
-            vcn_id=self.vcn.id,
-            display_name="private-vcn-security-list",
-            ingress_security_rules=[{"protocol": "6", "source": "10.1.0.0/16"}],
-            egress_security_rules=[{"protocol": "6", "destination": "0.0.0.0/0"}],
-        )
 
     def _create_subnets(self):
         # Public Subnet using public security list and route table
@@ -97,19 +88,6 @@ class Network:
             display_name="public-subnet",
             dns_label="PublicSubnet",
             security_list_ids=[self.public_security_list.id],
-            route_table_id=self.route_table.id,
-            dhcp_options_id=self.vcn.default_dhcp_options_id,
-        )
-
-        # Private Subnet using private security list and same route table
-        self.private_subnet = oci.core.Subnet(
-            "private_subnet",
-            cidr_block="10.1.20.0/24",
-            compartment_id=self.compartment_ocid,
-            vcn_id=self.vcn.id,
-            display_name="private-subnet",
-            dns_label="PrivateSubnet",
-            security_list_ids=[self.private_security_list.id],
             route_table_id=self.route_table.id,
             dhcp_options_id=self.vcn.default_dhcp_options_id,
         )
