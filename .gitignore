@@ -184,7 +184,6 @@ build/
 node_modules/
 yarn.lock
 package-lock.json
-Pulumi.*.yaml
 .ionide/
 *.iml
 key.rsa*
