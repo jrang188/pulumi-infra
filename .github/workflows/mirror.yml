@@ -16,4 +16,4 @@ jobs:
           target_repo_url:
             git@github.com:jrang188/pulumi-infra.git
           ssh_private_key:                              # <-- use 'secrets' to pass credential information.
-            ${{ secrets.GITHUB_SSH_PRIVATE_KEY }}
+            ${{ secrets.GH_SSH_PRIVATE_KEY }}
