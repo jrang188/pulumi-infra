@@ -1,8 +1,9 @@
 name: Mirroring
 
-on: [push, delete]
-  branches:
-    -'main'
+on: 
+  [push, delete]:
+    branches:
+      - main
 
 jobs:
   mirror-to-private:
