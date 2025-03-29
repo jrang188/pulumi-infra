@@ -6,7 +6,7 @@ import pulumi_oci as oci
 oci_config = pulumi.Config("oci")
 config = pulumi.Config()
 
-tenancy_ocid = oci_config.get("tenancyOcid")
+tenancy_ocid = oci_config.require("tenancyOcid")
 compartment_ocid = oci_config.get("compartmentOcid")
 if compartment_ocid is None:
     compartment_ocid = tenancy_ocid
