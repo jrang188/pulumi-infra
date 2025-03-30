@@ -18,7 +18,7 @@ jobs:
         uses: astral-sh/setup-uv@v5
       - uses: actions/setup-python@v5
         with:
-          python-version-file: "pyproject.toml"
+          python-version-file: "oci/infra/pyproject.toml"
       - name: Install the project
         run: uv sync --all-extras --dev
       - uses: pulumi/actions@v6
