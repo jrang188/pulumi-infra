@@ -9,19 +9,18 @@ jobs:
   pulumi:
     name: Update
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: oci/infra
     steps:
       - uses: actions/checkout@v4
       - name: Install uv
         uses: astral-sh/setup-uv@v5
-      - name: Set up Python
-        run: uv python install
       - uses: actions/setup-python@v5
-        working-directory: oci/infra
         with:
           python-version-file: "pyproject.toml"
       - name: Install the project
         run: uv sync --all-extras --dev
-        working-directory: oci/infra
       - uses: pulumi/actions@v6
         with:
           command: up
