@@ -10,7 +10,7 @@ class ComputeInstance:
         instance_name: str,
         instance_ocpus: int,
         instance_memory_in_gbs: int,
-        subnet_id: id,
+        subnet_id: int,
         amd64_cpu: bool = False,
     ):
         # -----------------------------------------------------------

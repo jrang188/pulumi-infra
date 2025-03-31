@@ -63,7 +63,6 @@ class Network:
             {
                 "protocol": "6",
                 "source": ip,
-                "tcp_options": {"min": 443, "max": 443},
             }
             for ip in self.allowed_ip_address
         ]
@@ -76,7 +75,6 @@ class Network:
             ingress_security_rules=public_ingress_rules,
             egress_security_rules=[{"protocol": "6", "destination": "0.0.0.0/0"}],
         )
-
 
     def _create_subnets(self):
         # Public Subnet using public security list and route table
@@ -91,3 +89,4 @@ class Network:
             route_table_id=self.route_table.id,
             dhcp_options_id=self.vcn.default_dhcp_options_id,
         )
+
