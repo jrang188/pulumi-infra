@@ -74,7 +74,7 @@ class Network:
             compartment_id=self.compartment_ocid,
             vcn_id=self.vcn.id,
             display_name="public-vcn-security-list",
-            ingress_security_rules=[public_ingress_rules, common_ingress_rules],
+            ingress_security_rules=public_ingress_rules + common_ingress_rules,
             egress_security_rules=[{"protocol": "6", "destination": "0.0.0.0/0"}],
         )
 
@@ -83,7 +83,7 @@ class Network:
             compartment_id=self.compartment_ocid,
             vcn_id=self.vcn.id,
             display_name="private-vcn-security-list",
-            ingress_security_rules=[common_ingress_rules],
+            ingress_security_rules=common_ingress_rules,
             egress_security_rules=[{"protocol": "6", "destination": "0.0.0.0/0"}],
         )
 
