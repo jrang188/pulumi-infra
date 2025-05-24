@@ -67,12 +67,23 @@ class Network:
             for ip in self.allowed_ip_address
         ]
 
+        common_ingress_rules = [{"protocol": "6", "source": "10.1.0.0/24"}]
+
         self.public_security_list = oci.core.SecurityList(
             "public_security_list",
             compartment_id=self.compartment_ocid,
             vcn_id=self.vcn.id,
             display_name="public-vcn-security-list",
-            ingress_security_rules=public_ingress_rules,
+            ingress_security_rules=[public_ingress_rules, common_ingress_rules],
+            egress_security_rules=[{"protocol": "6", "destination": "0.0.0.0/0"}],
+        )
+
+        self.private_security_list = oci.core.SecurityList(
+            "private_security_list",
+            compartment_id=self.compartment_ocid,
+            vcn_id=self.vcn.id,
+            display_name="private-vcn-security-list",
+            ingress_security_rules=[common_ingress_rules],
             egress_security_rules=[{"protocol": "6", "destination": "0.0.0.0/0"}],
         )
 
@@ -90,3 +101,13 @@ class Network:
             dhcp_options_id=self.vcn.default_dhcp_options_id,
         )
 
+        self.private_subnet = oci.core.Subnet(
+            "private_subnet",
+            cidr_block="10.1.20.0/24",
+            compartment_id=self.compartment_ocid,
+            vcn_id=self.vcn.id,
+            dns_label="PrivateSubnet",
+            security_list_ids=[],
+            route_table_id=self.route_table.id,
+            dhcp_options_id=self.vcn.default_dhcp_options_id,
+        )
